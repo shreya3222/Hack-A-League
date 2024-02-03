@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRAIL</title>
+    <link rel="icon" href="CH.ico">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/e03d6b8c21.js" crossorigin="anonymous"></script>
+</head>
+<STYLE>
+    *{
+        font-family: 'Orbitron', sans-serif;
+    }
+    .bg-img {
+  background-image: url("VOICE 1.jpg");
+  min-height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+.i{
+  background-image: linear-gradient(rgba(0, 0, 2, 0.724), rgba(0, 0, 5, 0.8)), url("VOICE 1.jpg");
+  min-height: 100vh;
+  min-width: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+</STYLE>
+<body>
+    <div class="bg-img ">
+        <div class="container bg-opacity-75">
+          <div class="topnav">
+            <nav class="navbar navbar-expand-lg bg-body-tertiary pt-3"style="--bs-bg-opacity: 0;">
+              <div class="container-fluid opacity-100">
+                <a class="navbar-brand text-light ps-4" href="#"><b>TRAIL</b></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                      <a class="nav-link active text-light ps-5" aria-current="page" href="#">HOME</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link text-light ps-5" href="#m1">ABOUT US</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link text-light ps-5" href="#m2">SERVICES</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link text-light ps-5" href="">SIGN UP</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </nav>
+          </div>
+          <section STYLE="background-color: #0f1b2400;">
+            <div class="i">
+                <center><DIV  style="color:white;padding:30vh;">
+                    <H1>LETS TALK!!</H1>
+                     <P>Click on start to record</P>
+                    <button onclick="startRecording()"type="button" class="btn btn-secondary"><i class="fa-solid fa-microphone"></i> START</button>
+                    <button onclick="stopRecording()"type="button" class="btn btn-secondary"><i class="fa-regular fa-circle-xmark"></i> STOP</button>
+                    <button onclick="playbackAudio()"type="button" class="btn btn-secondary"><i class="fa-solid fa-play"></i> Play</button>
+                </DIV></center>
+            </div>
+          </section>
+          
+        </div>
+      </div>
+      <footer STYLE="background-color: #0F1B24;">
+        <center><h1 class="hfont" style="font-size:45px;padding:5vh;color: WHITE;">CONTACT US</h1></center>
+        <div class="row">
+          <div class="col-4" style="padding-left:10vh;color:white">
+             <H3>ADDRESS</H3><BR>
+             <P>JSS Hostel,<br>Srinivaspura,Kengeri,<br>Bangalore-560060</P><br><br>
+             <h3>GENERAL ENQUIRES</h3>
+             <p>MindTrail@gmail.com<br>+91-990056460<br>+91-9740723439</p>
+          </div>
+          <div class="col-4" style="padding-left:7vh;color:white">
+            <H3 style="margin-top: 34vh;">SOCIAL MEDIA</H3><BR>
+            <i class="fa-brands fa-instagram s"></i>
+            <i class="fa-brands fa-whatsapp s"></i>
+            <i class="fa-brands fa-x-twitter s"></i>
+            <i class="fa-brands fa-facebook s"></i>
+          </div>
+          <div class="col-4">
+             <h2 class="hfont" style="font-size:40px;padding: 5vh; color: white;">TRAIL</h2>
+             <p style="font-size:18px;padding:3vh;color: white;">
+                "Empowering Minds, Enhancing Lives: Your Journey to Mental Wellness Begins Here with Trail. Harnessing the Power of AI for Personalized Mental Health Support and Insight. Together, Let's Navigate the Path to Inner Balance and Resilience.
+             </p>
+          </div>
+        </div>
+        <div class="row" style="font-size:17px;;color: rgba(255, 255, 255, 0.463);margin-left: 70vh;margin-top: 5vh;">© Copyrights 2023 - 2024.Trail.All Rights Reserved.</div>
+      </footer>
+      <script>
+        let mediaRecorder;
+        let audioChunks = [];
+        let audioBlob;
+      
+        async function startRecording() {
+          const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      
+          mediaRecorder = new MediaRecorder(stream);
+      
+          mediaRecorder.ondataavailable = (event) => {
+            if (event.data.size > 0) {
+              audioChunks.push(event.data);
+            }
+          };
+      
+          mediaRecorder.onstop = () => {
+            audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+            const audioUrl = URL.createObjectURL(audioBlob);
+            console.log(audioUrl);
+          };
+      
+          mediaRecorder.start();
+        }
+      
+        function stopRecording() {
+          if (mediaRecorder.state === 'recording') {
+            mediaRecorder.stop();
+          }
+        }
+      
+        function playbackAudio() {
+          if (audioBlob) {
+            const audioUrl = URL.createObjectURL(audioBlob);
+            const audio = new Audio(audioUrl);
+            audio.play();
+          }
+        }
+      </script>
+</body>
+</html>
